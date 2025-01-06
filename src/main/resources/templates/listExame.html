@@ -100,11 +100,13 @@
         </div>
     </nav>
     <div class="container mt-4 table-responsive">
-        <div id="alert-success" data-aos="zoom-in" th:if="${success}" class="alert alert-success" role="alert">
-            <h6 th:text="${success}"></h6>
+        <div id="alert-success" data-aos="zoom-in" th:if="${success}"
+            class="d-flex justify-content-center align-items-center mt-3" role="alert">
+            <h6 style="color: green;" th:text="${success}"></h6>
         </div>
-        <div data-aos="zoom-in" th:if="${successMessage}" class="alert alert-success" role="alert">
-            <h6 th:text="${successMessage}"></h6>
+        <div data-aos="zoom-in" th:if="${successMessage}" class="d-flex justify-content-center align-items-center mt-3"
+            role="alert">
+            <h6 style="color: green;" th:text="${successMessage}"></h6>
         </div>
         <table class="table table-hover table-bordered table-striped table-rounded">
             <tr id="first-line">

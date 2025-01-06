@@ -125,10 +125,12 @@
         <label for="laboratorio">ID do Laboratório</label>
       </div>
       <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+      <div data-aos="zoom-in" class="d-flex justify-content-center align-items-center mt-3" id="alert-success"
+        th:if="${successMessage}" role="alert">
+        <h6 style="color: green;" th:text="${successMessage}"></h6>
+      </div>
     </form>
-    <div id="alert-success" data-aos="zoom-in" th:if="${successMessage}" class="alert alert-success" role="alert">
-      <h6 th:text="${successMessage}"></h6>
-    </div>
+
   </main>
   <script>
     AOS.init();

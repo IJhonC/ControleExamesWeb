@@ -157,13 +157,19 @@
         <label for="floatingInputEmail">Email</label>
       </div>
 
+      <div data-aos="zoom-in" class="d-flex justify-content-center align-items-center mt-3" id="alert-success"
+        th:if="${successMessage}" role="alert">
+        <h6 style="color: green;" th:text="${successMessage}"></h6>
+      </div>
+
       <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+
     </form>
 
-    <div id="alert-success" th:if="${successMessage}" class="alert alert-success" role="alert">
-      <h6 th:text="${successMessage}"></h6>
-    </div>
   </main>
+  <script>
+    AOS.init();
+  </script>
 </body>
 
 </html>
