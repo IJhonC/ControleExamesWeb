@@ -2,8 +2,10 @@ package com.sa.appexamelaboratorio.controller;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.sa.appexamelaboratorio.model.Exame;
 import com.sa.appexamelaboratorio.model.Laboratorio;
 import com.sa.appexamelaboratorio.model.Paciente;
+import com.sa.appexamelaboratorio.model.Usuario;
 import com.sa.appexamelaboratorio.service.ExameService;
 import com.sa.appexamelaboratorio.service.LabService;
 import com.sa.appexamelaboratorio.service.PacienteService;
+import com.sa.appexamelaboratorio.service.UsuarioService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +37,9 @@ public class ExameController {
     @Autowired
     private PacienteService pacienteService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @GetMapping("/cadastrar")
     public String mostrarFormularioCadastro(Model model) {
         List<Laboratorio> laboratorios = labService.listarLab();
@@ -46,6 +53,9 @@ public class ExameController {
 
     @PostMapping("/cadastrar")
     public String cadastrarExame(Exame exame, RedirectAttributes redirectAttributes) {
+        String emailUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<Usuario> user = usuarioService.buscarPorEmail(emailUser);
+        exame.setUsuario(user.get());
         exameService.salvarExame(exame);
         redirectAttributes.addFlashAttribute("successMessage", "Exame cadastrado com sucesso!");
         return "redirect:/exame/cadastrar";

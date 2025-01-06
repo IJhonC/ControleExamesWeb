@@ -3,6 +3,8 @@ package com.sa.appexamelaboratorio.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 
@@ -17,6 +19,10 @@ public class Laboratorio {
     private String endereco;
     private String telefone;
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario; // Relacionamento com o usuário
 
     public Long getId() {
         return id;
@@ -56,6 +62,14 @@ public class Laboratorio {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

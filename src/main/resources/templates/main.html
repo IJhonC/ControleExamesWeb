@@ -15,6 +15,16 @@
   <!-- AOS  <!-->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <style>
+    body {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    span {
+      color: black;
+    }
+  </style>
 </head>
 
 <body>
@@ -74,6 +84,9 @@
               </ul>
             </li>
           </ul>
+          <div class="d-flex align-items-center">
+            <a th:href="@{/logout}" class="btn btn-danger">Logout</a>
+          </div>
         </div>
       </div>
     </nav>
@@ -82,6 +95,8 @@
     <div class="row">
       <div class="col-mb-6">
         <h1 data-aos="fade-right" data-aos-duration="1500">Sistema de Gerenciamento de Exames</h1>
+        <h3 id="user" data-aos="fade-right" data-aos-duration="1500">Bem vindo, <span th:text="${usuario.nome}">Usuario</span>!
+        </h3>
         <h3 data-aos="fade-right" data-aos-duration="1500" data-aos-delay="200" id="mini-title">Senai Timbó</h3>
         <p data-aos="fade-right" data-aos-duration="1500" data-aos-delay="400">
           Relacionamento Exame-Paciente-Laboratório João Vitor Cristofolini

@@ -32,70 +32,70 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+
+  <!-- AOS  <!-->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
-<!-- AOS  <!-->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <img src="/img/sus.png" alt="logo" width="80" class="d-inline-block align-text-top"
-            style="margin-right: 15px" />
-        <a class="navbar-brand" href="/main">Hospital do João </a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Cadastro
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="/lab/cadastrar">Cadastrar Laboratório</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/paciente/cadastrar">Cadastrar Paciente</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/exame/cadastrar">Cadastrar Exame</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Banco de Dados
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="/lab/listar">Listar Laboratórios</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/paciente/listar">Listar Pacientes</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/exame/listar">Listar Exames</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Relatórios </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="/relatorio">Gerar Relatório</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/relatorio/kanban">Kanban</a>
-                        </li>
-                    </ul>
-                </li>
+      <img src="/img/sus.png" alt="logo" width="80" class="d-inline-block align-text-top" style="margin-right: 15px" />
+      <a class="navbar-brand" href="/main">Hospital do João </a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Cadastro
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="/lab/cadastrar">Cadastrar Laboratório</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/paciente/cadastrar">Cadastrar Paciente</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/exame/cadastrar">Cadastrar Exame</a>
+              </li>
             </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Banco de Dados
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="/lab/listar">Listar Laboratórios</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/paciente/listar">Listar Pacientes</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/exame/listar">Listar Exames</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Relatórios </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" href="/relatorio">Gerar Relatório</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/relatorio/kanban">Kanban</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center">
+          <a th:href="@{/logout}" class="btn btn-danger">Logout</a>
         </div>
+      </div>
     </div>
-</nav>
+  </nav>
 
   <div class="container mt-4 table-responsive">
     <div id="alert-success" data-aos="zoom-in" th:if="${success}" class="alert alert-success" role="alert">

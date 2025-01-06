@@ -27,6 +27,10 @@ public class Exame {
     @JoinColumn(name = "laboratorio_id")
     private Laboratorio laboratorio;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario; // Relacionamento com o usuário
+
     public Long getId() {
         return id;
     }
@@ -73,6 +77,14 @@ public class Exame {
 
     public void setLaboratorio(Laboratorio laboratorio) {
         this.laboratorio = laboratorio;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

@@ -12,4 +12,6 @@ public interface ExameRepository extends JpaRepository<Exame, Long> {
     List<Exame> findByPacienteId(Long pacienteId);
 
     List<Exame> findByLaboratorioId(Long laboratorioId);
+
+    List<Exame> findByUsuarioId(Long userId);
 }

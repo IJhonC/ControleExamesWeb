@@ -1,6 +1,9 @@
 package com.sa.appexamelaboratorio.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sa.appexamelaboratorio.model.Paciente;
+import com.sa.appexamelaboratorio.model.Usuario;
 import com.sa.appexamelaboratorio.service.PacienteService;
+import com.sa.appexamelaboratorio.service.UsuarioService;
 
 import org.springframework.ui.Model;
 
@@ -20,6 +25,9 @@ public class PacienteController {
     @Autowired
     private PacienteService pacienteService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @GetMapping("/cadastrar")
     public String mostrarFormularioCadastro(Model model) {
         model.addAttribute("paciente", new Paciente());
@@ -28,6 +36,9 @@ public class PacienteController {
 
     @PostMapping("/cadastrar")
     public String cadastrarPaciente(Paciente paciente, RedirectAttributes redirectAttributes) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<Usuario> user = usuarioService.buscarPorEmail(email);
+        paciente.setUsuario(user.get());
         pacienteService.salvarPaciente(paciente);
         redirectAttributes.addFlashAttribute("successMessage", "Paciente cadastrado com sucesso!");
         return "redirect:/paciente/cadastrar";
@@ -53,19 +64,19 @@ public class PacienteController {
 
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
-        Paciente paciente = pacienteService.buscarPorId(id); 
+        Paciente paciente = pacienteService.buscarPorId(id);
         if (paciente != null) {
-            model.addAttribute("paciente", paciente); 
-            return "editarPaciente"; 
+            model.addAttribute("paciente", paciente);
+            return "editarPaciente";
         } else {
-            return "redirect:/paciente/listar"; 
+            return "redirect:/paciente/listar";
         }
     }
 
     @PostMapping("/editar")
     public String editarPaciente(@ModelAttribute Paciente paciente, RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("success", "Paciente alterado com sucesso!");
-        pacienteService.salvarPaciente(paciente); 
-        return "redirect:/paciente/listar"; 
+        pacienteService.salvarPaciente(paciente);
+        return "redirect:/paciente/listar";
     }
 }

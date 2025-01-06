@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Paciente {
@@ -15,6 +17,10 @@ public class Paciente {
     private Integer idade;
     private Double peso;
     private Double altura;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario; // Relacionamento com o usuário
 
     public Long getId() {
         return id;
@@ -54,6 +60,14 @@ public class Paciente {
 
     public void setAltura(Double altura) {
         this.altura = altura;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

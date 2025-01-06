@@ -1,6 +1,9 @@
 package com.sa.appexamelaboratorio.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +15,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sa.appexamelaboratorio.model.Laboratorio;
+import com.sa.appexamelaboratorio.model.Usuario;
 import com.sa.appexamelaboratorio.service.LabService;
+import com.sa.appexamelaboratorio.service.UsuarioService;
 
 @RequestMapping("/lab")
 @Controller
 public class LabController {
     @Autowired
     private LabService labService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping("/cadastrar")
     public String mostrarFormularioCadastro(Model model) {
@@ -46,6 +54,10 @@ public class LabController {
         laboratorio.setEndereco(enderecoCompleto); // Atribuindo o endereço concatenado
         laboratorio.setTelefone(telefone);
         laboratorio.setEmail(email);
+
+        String emailUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<Usuario> user = usuarioService.buscarPorEmail(emailUser);
+        laboratorio.setUsuario(user.get());
 
         // Salvando no banco de dados
         labService.salvarLab(laboratorio);
@@ -121,33 +133,33 @@ public class LabController {
             return "redirect:/lab/listar";
         }
     }
-@PostMapping("/editar")
-public String editarLaboratorio(
-    @RequestParam String nome,
-    @RequestParam String rua,
-    @RequestParam String numero,
-    @RequestParam String bairro,
-    @RequestParam String cidade,
-    @RequestParam String estado,
-    @RequestParam String telefone,
-    @RequestParam String email,
-    @ModelAttribute Laboratorio laboratorio,
-    RedirectAttributes redirectAttributes) {
 
-    // Concatenar os campos de endereço
-    String endereco = rua + ", " + numero + " - " + bairro + ", " + cidade + " - " + estado;
+    @PostMapping("/editar")
+    public String editarLaboratorio(
+            @RequestParam String nome,
+            @RequestParam String rua,
+            @RequestParam String numero,
+            @RequestParam String bairro,
+            @RequestParam String cidade,
+            @RequestParam String estado,
+            @RequestParam String telefone,
+            @RequestParam String email,
+            @ModelAttribute Laboratorio laboratorio,
+            RedirectAttributes redirectAttributes) {
 
+        // Concatenar os campos de endereço
+        String endereco = rua + ", " + numero + " - " + bairro + ", " + cidade + " - " + estado;
 
-    laboratorio.setNome(nome);
-    laboratorio.setEndereco(endereco); // Definindo o endereço concatenado
-    laboratorio.setTelefone(telefone);
-    laboratorio.setEmail(email);
+        laboratorio.setNome(nome);
+        laboratorio.setEndereco(endereco); // Definindo o endereço concatenado
+        laboratorio.setTelefone(telefone);
+        laboratorio.setEmail(email);
 
-    // Salvar o laboratório com o endereço gerado
-    labService.salvarLab(laboratorio);
+        // Salvar o laboratório com o endereço gerado
+        labService.salvarLab(laboratorio);
 
-    // Adicionar mensagem de sucesso e redirecionar
-    redirectAttributes.addFlashAttribute("success", "Laboratório alterado com sucesso!");
-    return "redirect:/lab/listar";
-}
+        // Adicionar mensagem de sucesso e redirecionar
+        redirectAttributes.addFlashAttribute("success", "Laboratório alterado com sucesso!");
+        return "redirect:/lab/listar";
+    }
 }
