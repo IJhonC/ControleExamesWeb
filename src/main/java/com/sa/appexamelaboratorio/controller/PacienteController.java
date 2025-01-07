@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sa.appexamelaboratorio.model.Paciente;
@@ -45,8 +46,13 @@ public class PacienteController {
     }
 
     @GetMapping("/listar")
-    public String listarPaciente(Model model) {
-        model.addAttribute("paciente", pacienteService.listarPacientes());
+    public String listarPacienteComParametro(Model model,
+            @RequestParam(required = false) String busca) {
+        if (busca == null) {
+            model.addAttribute("paciente", pacienteService.listarPacientes());
+            return "listPaciente";
+        }
+        model.addAttribute("paciente", pacienteService.buscarPorNome(busca));
         return "listPaciente";
     }
 

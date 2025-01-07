@@ -8,4 +8,7 @@ import com.sa.appexamelaboratorio.model.Paciente;
 
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
     List<Paciente> findByUsuarioId(Long userId);
+
+    List<Paciente> findByNomeStartingWithIgnoreCase(String nome);
+
 }

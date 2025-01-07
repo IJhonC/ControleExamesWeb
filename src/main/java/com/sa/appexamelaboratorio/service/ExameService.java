@@ -50,4 +50,8 @@ public class ExameService {
     public List<Exame> buscarPorLaboratorio(Long laboratorioId) {
         return exameRepository.findByLaboratorioId(laboratorioId);
     }
+
+    public List<Exame> buscarPorNome(String nome) {
+        return exameRepository.findByNomeStartingWithIgnoreCase(nome);
+    }
 }

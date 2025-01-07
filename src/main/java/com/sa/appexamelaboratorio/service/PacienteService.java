@@ -37,4 +37,8 @@ public class PacienteService {
     public void deletarPorId(Long id) {
         pacienteRepository.deleteById(id);
     }
+
+    public List<Paciente> buscarPorNome(String nome) {
+        return pacienteRepository.findByNomeStartingWithIgnoreCase(nome);
+    }
 }

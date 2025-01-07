@@ -8,4 +8,6 @@ import com.sa.appexamelaboratorio.model.Laboratorio;
 
 public interface LaboratorioRepository extends JpaRepository<Laboratorio, Long> {
      List<Laboratorio> findByUsuarioId(Long userId);
+
+     List<Laboratorio> findByNomeStartingWithIgnoreCase(String nome);
 }

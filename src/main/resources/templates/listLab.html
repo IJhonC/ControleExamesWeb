@@ -91,13 +91,21 @@
           </li>
         </ul>
         <div class="d-flex align-items-center">
-          <a th:href="@{/logout}" class="btn btn-danger">Logout</a>
+          <a th:href="@{/logout}" class="btn btn-danger">Sair</a>
         </div>
       </div>
     </div>
   </nav>
 
   <div class="container mt-4 table-responsive">
+    <div class="mb-3">
+      <form style="display: flex; justify-content: center; margin-top: 1vh;" th:action="@{/lab/listar}"
+        method="get">
+        <input style="width: 80%;" type="text" id="search-input" name="busca" class="form-control"
+          placeholder="Pesquisar laboratórios..." />
+        <button style="margin-left: 2vh;" class="btn btn-primary" type="submit">Pesquisar</button>
+      </form>
+    </div>
     <div id="alert-success" data-aos="zoom-in" th:if="${success}"
       class="d-flex justify-content-center align-items-center mt-3" role="alert">
       <h6 style="color: green;" th:text="${success}"></h6>

@@ -37,4 +37,8 @@ public class LabService {
     public void deletarPorId(Long id) {
         laboratorioRepository.deleteById(id);
     }
+
+    public List<Laboratorio> buscarPorNome(String nome) {
+        return laboratorioRepository.findByNomeStartingWithIgnoreCase(nome);
+    }
 }

@@ -69,8 +69,12 @@ public class LabController {
     }
 
     @GetMapping("/listar")
-    public String listarLaboratorios(Model model) {
-        model.addAttribute("lab", labService.listarLab());
+    public String listarLaboratorios(Model model, @RequestParam(required = false) String busca) {
+        if (busca == null) {
+            model.addAttribute("lab", labService.listarLab());
+            return "listLab";
+        }
+        model.addAttribute("lab", labService.buscarPorNome(busca));
         return "listLab";
     }
 

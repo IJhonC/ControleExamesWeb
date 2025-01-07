@@ -23,6 +23,7 @@ import com.sa.appexamelaboratorio.service.UsuarioService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RequestMapping("/exame")
@@ -62,8 +63,12 @@ public class ExameController {
     }
 
     @GetMapping("/listar")
-    public String listarExames(Model model) {
-        model.addAttribute("exame", exameService.listarExames());
+    public String listarExames(Model model, @RequestParam(required = false) String busca) {
+        if (busca == null) {
+            model.addAttribute("exame", exameService.listarExames());
+            return "listExame";
+        }
+        model.addAttribute("exame", exameService.buscarPorNome(busca));
         return "listExame";
     }
 
