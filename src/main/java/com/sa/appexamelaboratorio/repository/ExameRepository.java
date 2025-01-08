@@ -16,4 +16,6 @@ public interface ExameRepository extends JpaRepository<Exame, Long> {
     List<Exame> findByUsuarioId(Long userId);
 
     List<Exame> findByNomeStartingWithIgnoreCase(String nome);
+
+    Long countByStatus(String status);
 }

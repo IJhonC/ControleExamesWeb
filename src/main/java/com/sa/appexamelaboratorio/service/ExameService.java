@@ -54,4 +54,12 @@ public class ExameService {
     public List<Exame> buscarPorNome(String nome) {
         return exameRepository.findByNomeStartingWithIgnoreCase(nome);
     }
+
+    public Long contarExames() {
+        return exameRepository.count();
+    }
+
+    public Long contarExamesStatus(String status){
+        return exameRepository.countByStatus(status);
+    }
 }

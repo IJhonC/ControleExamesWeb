@@ -41,4 +41,8 @@ public class PacienteService {
     public List<Paciente> buscarPorNome(String nome) {
         return pacienteRepository.findByNomeStartingWithIgnoreCase(nome);
     }
+
+    public Long contarPacientes() {
+        return pacienteRepository.count();
+    }
 }

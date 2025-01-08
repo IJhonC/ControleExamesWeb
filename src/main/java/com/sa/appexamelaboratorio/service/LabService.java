@@ -41,4 +41,8 @@ public class LabService {
     public List<Laboratorio> buscarPorNome(String nome) {
         return laboratorioRepository.findByNomeStartingWithIgnoreCase(nome);
     }
+
+    public Long contarLaboratorios(){
+        return laboratorioRepository.count();
+    }
 }

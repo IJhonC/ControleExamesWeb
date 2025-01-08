@@ -40,3 +40,36 @@ body {
 #user {
   margin-left: 7%;
 }
+
+.card {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 200px;
+  background-color: transparent;
+  /* Fundo transparente */
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+/* Texto para manter visível no fundo branco */
+.card h3,
+.card p {
+  transition: color 0.3s;
+}
+
+/* Efeito de Hover */
+.card:hover {
+  background-color: white;
+  /* Preenche com branco */
+  transform: scale(1.1);
+  /* Aumenta o tamanho */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* Adiciona sombra */
+}
+
+/* Mantém o texto colorido no hover */
+.card:hover h3,
+.card:hover p {
+  color: inherit;
+}
