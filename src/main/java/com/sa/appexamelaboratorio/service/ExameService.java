@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.sa.appexamelaboratorio.model.Exame;
@@ -59,7 +60,11 @@ public class ExameService {
         return exameRepository.count();
     }
 
-    public Long contarExamesStatus(String status){
-        return exameRepository.countByStatus(status);
+    public Long contarExamesStatus(String status) {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Usuario usuario = usuarioService.buscarPorEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+
+        return exameRepository.countByStatusAndUsuarioId(status, usuario.getId_usuario());
     }
 }

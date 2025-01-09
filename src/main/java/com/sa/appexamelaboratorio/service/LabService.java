@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.sa.appexamelaboratorio.model.Laboratorio;
@@ -42,7 +43,11 @@ public class LabService {
         return laboratorioRepository.findByNomeStartingWithIgnoreCase(nome);
     }
 
-    public Long contarLaboratorios(){
-        return laboratorioRepository.count();
+    public Long contarLaboratorios() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Usuario usuario = usuarioService.buscarPorEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+
+        return laboratorioRepository.countByUsuarioId(usuario.getId_usuario());
     }
 }

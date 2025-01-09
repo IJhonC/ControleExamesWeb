@@ -44,7 +44,8 @@
 
         <!-- CAMPO CPF -->
         <div class="form-floating mb-3">
-            <input oninput="mascara(this)" type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF" required>
+            <input oninput="mascara(this)" type="text" id="cpf" name="cpf" class="form-control" placeholder="CPF"
+                required>
             <label for="cpf">CPF:</label>
         </div>
 
@@ -66,6 +67,15 @@
                 <option value="Feminino">Feminino</option>
             </select>
             <label for="sexo">Sexo:</label>
+        </div>
+
+        <!-- CAMPO ROlE -->
+        <div class="form-floating mb-3">
+            <select class="form-select" name="role" id="role" required>
+                <option value="ADMIN">Adiministrador</option>
+                <option value="USER">Cliente</option>
+            </select>
+            <label for="role">Tipo de Usuário:</label>
         </div>
 
         <!-- CAMPO DATA NASCIMENTO -->

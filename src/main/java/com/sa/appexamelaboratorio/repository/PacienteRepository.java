@@ -11,4 +11,6 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
     List<Paciente> findByNomeStartingWithIgnoreCase(String nome);
 
+    Long countByUsuarioId(Long userId);
+
 }

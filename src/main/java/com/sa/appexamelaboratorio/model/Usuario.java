@@ -2,18 +2,12 @@ package com.sa.appexamelaboratorio.model;
 
 import java.sql.Date;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "usuario")
 public class Usuario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,17 +17,10 @@ public class Usuario {
     private String email;
     private String sexo;
     private String senha;
+    private String role;
 
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-
-    public Long getId_usuario() {
-        return id;
-    }
-
-    public void setId_usuario(Long id_usuario) {
-        this.id = id_usuario;
-    }
 
     public String getNome() {
         return nome;
@@ -81,5 +68,21 @@ public class Usuario {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public Long getId_usuario() {
+        return id;
+    }
+
+    public void setId_Usuario(Long id) {
+        this.id = id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

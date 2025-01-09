@@ -35,10 +35,13 @@ public class UsuarioService implements UserDetailsService {
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com o email: " + email));
 
+        // Transforme as roles do banco de dados em uma String
+        String role = usuario.getRole();
+
         return User.builder()
                 .username(usuario.getEmail())
                 .password(usuario.getSenha())
-                .roles("USER")
+                .roles(role)
                 .build();
     }
 
@@ -48,4 +51,3 @@ public class UsuarioService implements UserDetailsService {
                 .orElse(null);
     }
 }
-    

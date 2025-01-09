@@ -10,4 +10,6 @@ public interface LaboratorioRepository extends JpaRepository<Laboratorio, Long> 
      List<Laboratorio> findByUsuarioId(Long userId);
 
      List<Laboratorio> findByNomeStartingWithIgnoreCase(String nome);
+
+     Long countByUsuarioId(Long userId);
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
   <meta charset="UTF-8" />
@@ -118,7 +118,7 @@
       <!-- Total de Pacientes -->
       <div class="card">
         <h3 th:text="${totalPacientes}" style="color: #2196F3;"></h3>
-        <p>Total de Pacientes</p>
+        <p>Total de Pacientes Cadastrados</p>
       </div>
 
       <!-- Exames Pendentes -->
@@ -131,6 +131,12 @@
       <div class="card">
         <h3 th:text="${totalLaboratorios}" style="color: #9C27B0;"></h3>
         <p>Laboratórios Ativos</p>
+      </div>
+    </div>
+    <div data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1000" sec:authorize="hasRole('ROLE_ADMIN')">
+      <div style="margin-top: 20px;" class="d-flex flex-column align-items-center">
+        <h2>Controle Adiministrador</h2>
+        <a href="/admin-dashboard"><button class="btn btn-danger">Painel de Controle</button></a>
       </div>
     </div>
   </main>
