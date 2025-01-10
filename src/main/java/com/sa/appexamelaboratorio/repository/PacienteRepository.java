@@ -13,4 +13,5 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
 
     Long countByUsuarioId(Long userId);
 
+    void deleteByUsuarioId(Long userId);
 }

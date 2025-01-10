@@ -32,7 +32,7 @@
     style="  background: linear-gradient(to left, #4a90e2, #ffffff 60%);">
 
     <!-- FORMULÁRIO DE CADASTRO -->
-    <form method="post" th:action="@{/cadastro}" class="container border rounded p-4 shadow bg-light"
+    <form method="post" th:action="@{/admin/cadastrarUsuario}" class="container border rounded p-4 shadow bg-light"
         style="width: 400px">
         <h2 class="text-center mb-4">Cadastrar Usuário</h2>
 
@@ -92,8 +92,8 @@
 
         <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
 
-        <div class="text-center" style="margin-top: 2vh;">
-            <p style="margin-bottom: 0;">Já é cliente? <a href="/login">Tente Entrar</a></p>
+        <div class="text-center mt-2">
+            <a class="btn btn-danger" href="/admin/admin-dashboard">Voltar</a>
         </div>
 
     </form>

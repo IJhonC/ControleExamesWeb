@@ -13,7 +13,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login", "/cadastro").permitAll() // acesso liberado as paginas
+                .requestMatchers("/login").permitAll() // acesso liberado as paginas
                 .requestMatchers("/admin/**").hasRole("ADMIN") // Apenas ADMIN pode acessar URLs começando com /admin
                 .requestMatchers("/**").hasAnyRole("USER", "ADMIN") // Usuários e Admins podem acessar URLs de usuário
                 .anyRequest().authenticated() // todas as outcasdaras paginas precisa de autenticação

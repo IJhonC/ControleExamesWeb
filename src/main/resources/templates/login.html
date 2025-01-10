@@ -41,16 +41,6 @@
 
         <button type="submit" class="btn btn-primary w-100">Entrar</button>
 
-        <!-- LINK TELA DE CADASTRO -->
-        <div class="text-center" style="margin-top: 2vh;">
-            <p style="margin-bottom: 0;">Não tem uma conta? <a href="/cadastro">Crie uma agora</a></p>
-        </div>
-
-        <div data-aos="zoom-in" th:if="${success}" class="d-flex justify-content-center align-items-center mt-3"
-            role="alert">
-            <h6 th:text="${success}" style="color: green;"></h6>
-        </div>
-
         <div data-aos="zoom-in" th:if="${param.error}" class="d-flex justify-content-center align-items-center mt-3"
             role="alert">
             <h6 style="color: red;">Credencias Inválidas. Tente Novamente!</h6>

@@ -35,12 +35,21 @@ public class UsuarioService implements UserDetailsService {
         return usuarioRepository.findByNomeStartingWithIgnoreCase(nome);
     }
 
+    public Usuario buscarPorId(Long id) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        return usuario.get();
+    }
+
     public Long contarPacientes() {
         return usuarioRepository.count();
     }
 
     public List<Usuario> listarUsuaios() {
         return usuarioRepository.findAll();
+    }
+
+    public void deletarPorId(Long id) {
+        usuarioRepository.deleteById(id);
     }
 
     @Override

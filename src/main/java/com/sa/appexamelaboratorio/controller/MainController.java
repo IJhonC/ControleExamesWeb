@@ -36,9 +36,9 @@ public class MainController {
                 .buscarPorEmail(org.springframework.security.core.context.SecurityContextHolder
                         .getContext().getAuthentication().getName());
 
-        model.addAttribute("totalExames", exameService.contarExames());
+        model.addAttribute("totalExames", exameService.contarExamesUsuario(usuario.get().getId()));
         model.addAttribute("totalPacientes", pacienteService.contarPacientesUsuario());
-        model.addAttribute("totalExamesAgendados", exameService.contarExamesStatusUsuario("AGENDADO"));
+        model.addAttribute("totalExamesAgendados", exameService.contarExamesStatusUsuarioLogado("AGENDADO"));
         model.addAttribute("totalLaboratorios", labService.contarLaboratoriosUsuario());
         model.addAttribute("usuario", usuario.get());
         return "main";

@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Controle</title>
+    <title>Trocar Senha</title>
 
+    <!-- CSS -->
     <!-- CSS -->
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -34,33 +35,6 @@
         #user {
             margin-left: 7%;
         }
-
-        .container {
-            margin-top: 20px;
-        }
-
-        .progress-container {
-            width: 80%;
-            margin: 20px auto;
-            text-align: center;
-        }
-
-        .progress-bar {
-            background-color: #4caf50;
-            height: 30px;
-            border-radius: 5px;
-            transition: width 1s ease-in-out;
-            color: white;
-            text-align: center;
-            line-height: 30px;
-        }
-
-        .progress-wrapper {
-            width: 100%;
-            background-color: #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-        }
     </style>
 
     <!-- BootStrap -->
@@ -73,9 +47,6 @@
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <!-- GRAFICOS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -143,110 +114,40 @@
         </nav>
     </header>
 
-    <main>
-        <div class="container d-flex">
-            <div class="col-5 d-flex align-items-center">
-                <div class="progress-container">
-                    <h2>Total de Usuários Cadastrados: <span th:text="${totalPacientes}">34</span></h2>
-                    <div class="progress-wrapper">
-                        <div class="progress-bar" th:style="'width:' + (${totalPacientes} / 100 * 100) + '%'">
-                            <span th:text="${totalPacientes} + '%'"></span>
-                        </div>
-                    </div>
-                    <a href="/admin/cadastrarUsuario">
-                        <button class="btn btn-primary mt-3">Novo Cadastro</button>
-                    </a>
-                    <div data-aos="zoom-in" th:if="${success}"
-                        class="d-flex justify-content-center align-items-center mt-3" role="alert">
-                        <h6 th:text="${success}" style="color: green;"></h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-7">
-                <div class="container">
-                    <canvas id="meuGrafico"></canvas>
-                </div>
-            </div>
-        </div>
+    <main class="d-flex flex-column justify-content-center align-items-center" style="height: 90vh">
+        <!-- FORMULÁRIO DE LOGIN -->
+        <form method="post" th:action="@{/admin/trocarSenha}" class="container border rounded p-4 shadow bg-light"
+            style="width: 400px">
+            <h2 class="text-center mb-4">Trocar Senha</h2>
+            <!-- ID(HIDDEN) -->
+            <input type="number" name="id" th:value="${id}" hidden>
 
-
-        <div class="container table-responsive">
-            <h1 style="text-align: center;">Gerenciar Usuários</h1>
-            <div class="mb-3">
-                <form style="display: flex; justify-content: center; margin-top: 1vh;" th:action="@{/admin-dashboard}"
-                    method="get">
-                    <input style="width: 80%;" type="text" id="search-input" name="busca" class="form-control"
-                        placeholder="Pesquisar Usuários..." />
-                    <button style="margin-left: 2vh;" class="btn btn-primary" type="submit">Pesquisar</button>
-                </form>
+            <!-- CAMPO NOVA SENHA -->
+            <div class="form-floating mb-3">
+                <input type="password" id="newPass" name="newPass" class="form-control" placeholder="Nova Senha"
+                    required>
+                <label for="newPass">Nova Senha:</label>
             </div>
 
-            <table class="table table-hover table-bordered table-striped table-rounded">
-                <tr id="first-line">
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Email</th>
-                    <th>Tipo do Usuário</th>
-                    <th>Ações</th>
-                </tr>
-                <tr th:each="usuario : ${usuarios}">
-                    <td th:text="${usuario.nome}"></td>
-                    <td th:text="${usuario.cpf}"></td>
-                    <td th:text="${usuario.email}"></td>
-                    <td th:text="${usuario.role == 'ADMIN' ? 'Administrador' : 'Cliente'}"></td>
-                    <td id="action-btn">
-                        <a th:href="@{/admin/gerenciar/{id}(id=${usuario.id})}">
-                            <button id="btn" type="button" class="btn btn-danger">
-                                Gerenciar Usuário
-                            </button>
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </div>
+            <!-- CAMPO CONFIRMAR NOVA SENHA -->
+            <div class="form-floating mb-3">
+                <input type="password" id="confirmNewPass" name="confirmNewPass" class="form-control"
+                    placeholder="Confirme a Nova Senha" required>
+                <label for="confirmNewPass">Confirme a Nova Senha:</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Salvar</button>
+
+            <div data-aos="zoom-in" th:if="${error}" class="d-flex justify-content-center align-items-center mt-3"
+                role="alert">
+                <h6 th:text="${error}" style="color: red;"></h6>
+            </div>
+        </form>
     </main>
 
 
-
-    <script th:inline="javascript">
+    <script>
         AOS.init();
-
-        // Dados passados pelo Thymeleaf
-        var arrayJs = /*[[${valores}]]*/[];
-
-        // Configuração do gráfico
-        const ctx = document.getElementById('meuGrafico').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar', // Tipo do gráfico
-            data: {
-                labels: ['Laboratórios', 'Pacientes', 'Exames'],  // Rótulos
-                datasets: [{
-                    label: 'Cadastros',
-                    data: arrayJs,  // Passando os dados para o gráfico
-                    backgroundColor: [
-                        'rgba(99, 167, 255, 0.5)', // Azul suave
-                        'rgba(72, 207, 173, 0.5)', // Verde menta
-                        'rgba(255, 193, 97, 0.5)'  // Laranja claro
-                    ],
-                    borderColor: [
-                        'rgba(99, 167, 255, 1)',
-                        'rgba(72, 207, 173, 1)',
-                        'rgba(255, 193, 97, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                indexAxis: 'y', // Gráfico horizontal
-                responsive: true,
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
     </script>
 </body>
 

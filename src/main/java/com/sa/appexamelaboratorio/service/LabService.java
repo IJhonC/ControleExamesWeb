@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sa.appexamelaboratorio.model.Laboratorio;
 import com.sa.appexamelaboratorio.model.Usuario;
@@ -39,6 +40,11 @@ public class LabService {
         laboratorioRepository.deleteById(id);
     }
 
+    @Transactional
+    public void deletarPeloUsuario(Long userId) {
+        laboratorioRepository.deleteByUsuarioId(userId);
+    }
+
     public List<Laboratorio> buscarPorNome(String nome) {
         return laboratorioRepository.findByNomeStartingWithIgnoreCase(nome);
     }
@@ -53,5 +59,9 @@ public class LabService {
 
     public Long contarLaboratorios() {
         return laboratorioRepository.count();
+    }
+
+    public Long contarPorId(Long id) {
+        return laboratorioRepository.countByUsuarioId(id);
     }
 }

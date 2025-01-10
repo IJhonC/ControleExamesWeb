@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sa.appexamelaboratorio.model.Exame;
 import com.sa.appexamelaboratorio.model.Usuario;
@@ -60,7 +61,20 @@ public class ExameService {
         return exameRepository.count();
     }
 
-    public Long contarExamesStatusUsuario(String status) {
+    public Long contarExamesUsuario(Long id) {
+        return exameRepository.countByUsuarioId(id);
+    }
+
+    public Long contarExamesStatusUsuario(Long idUsuario, String status) {
+        return exameRepository.countByStatusAndUsuarioId(status, idUsuario);
+    }
+
+    @Transactional
+    public void deletarPeloUsuario(Long userId){
+        exameRepository.deleteByUsuarioId(userId);
+    }
+
+    public Long contarExamesStatusUsuarioLogado(String status) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Usuario usuario = usuarioService.buscarPorEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));

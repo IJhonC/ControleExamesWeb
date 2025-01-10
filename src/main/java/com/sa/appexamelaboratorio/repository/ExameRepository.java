@@ -20,4 +20,6 @@ public interface ExameRepository extends JpaRepository<Exame, Long> {
     Long countByStatusAndUsuarioId(String status, Long userId);
 
     Long countByUsuarioId(Long userId);
+
+    void deleteByUsuarioId(Long userId);
 }
