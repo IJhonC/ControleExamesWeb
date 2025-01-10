@@ -28,7 +28,7 @@ public class ExameService {
     public List<Exame> listarExames() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<Usuario> user = usuarioService.buscarPorEmail(email);
-        return exameRepository.findByUsuarioId(user.get().getId_usuario());
+        return exameRepository.findByUsuarioId(user.get().getId());
     }
 
     public Exame buscarPorId(Long id) {
@@ -60,11 +60,11 @@ public class ExameService {
         return exameRepository.count();
     }
 
-    public Long contarExamesStatus(String status) {
+    public Long contarExamesStatusUsuario(String status) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Usuario usuario = usuarioService.buscarPorEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
-        return exameRepository.countByStatusAndUsuarioId(status, usuario.getId_usuario());
+        return exameRepository.countByStatusAndUsuarioId(status, usuario.getId());
     }
 }

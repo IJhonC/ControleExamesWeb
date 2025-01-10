@@ -1,5 +1,6 @@
 package com.sa.appexamelaboratorio.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,18 @@ public class UsuarioService implements UserDetailsService {
         return usuarioRepository.findByEmail(email);
     }
 
+    public List<Usuario> buscarPorNome(String nome) {
+        return usuarioRepository.findByNomeStartingWithIgnoreCase(nome);
+    }
+
+    public Long contarPacientes() {
+        return usuarioRepository.count();
+    }
+
+    public List<Usuario> listarUsuaios() {
+        return usuarioRepository.findAll();
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findByEmail(email)
@@ -47,7 +60,7 @@ public class UsuarioService implements UserDetailsService {
 
     public Long buscarIdPorEmail(String email) {
         return usuarioRepository.findByEmail(email)
-                .map(Usuario::getId_usuario)
+                .map(Usuario::getId)
                 .orElse(null);
     }
 }

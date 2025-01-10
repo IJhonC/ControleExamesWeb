@@ -70,7 +70,7 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
     }
 
-    public Long getId_usuario() {
+    public Long getId() {
         return id;
     }
 

@@ -27,7 +27,7 @@ public class LabService {
     public List<Laboratorio> listarLab() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<Usuario> user = usuarioService.buscarPorEmail(email);
-        return laboratorioRepository.findByUsuarioId(user.get().getId_usuario());
+        return laboratorioRepository.findByUsuarioId(user.get().getId());
     }
 
     public Laboratorio buscarPorId(Long id) {
@@ -43,11 +43,15 @@ public class LabService {
         return laboratorioRepository.findByNomeStartingWithIgnoreCase(nome);
     }
 
-    public Long contarLaboratorios() {
+    public Long contarLaboratoriosUsuario() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Usuario usuario = usuarioService.buscarPorEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
-        return laboratorioRepository.countByUsuarioId(usuario.getId_usuario());
+        return laboratorioRepository.countByUsuarioId(usuario.getId());
+    }
+
+    public Long contarLaboratorios() {
+        return laboratorioRepository.count();
     }
 }

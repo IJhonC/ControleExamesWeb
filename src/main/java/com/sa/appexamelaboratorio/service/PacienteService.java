@@ -27,7 +27,7 @@ public class PacienteService {
     public List<Paciente> listarPacientes() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<Usuario> user = usuarioService.buscarPorEmail(email);
-        return pacienteRepository.findByUsuarioId(user.get().getId_usuario());
+        return pacienteRepository.findByUsuarioId(user.get().getId());
     }
 
     public Paciente buscarPorId(Long id) {
@@ -43,11 +43,15 @@ public class PacienteService {
         return pacienteRepository.findByNomeStartingWithIgnoreCase(nome);
     }
 
-    public Long contarPacientes() {
+    public Long contarPacientesUsuario() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Usuario usuario = usuarioService.buscarPorEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
-        return pacienteRepository.countByUsuarioId(usuario.getId_usuario());
+        return pacienteRepository.countByUsuarioId(usuario.getId());
+    }
+
+    public Long contarPacientes(){
+        return pacienteRepository.count();
     }
 }

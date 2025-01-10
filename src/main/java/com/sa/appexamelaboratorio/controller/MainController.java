@@ -37,9 +37,9 @@ public class MainController {
                         .getContext().getAuthentication().getName());
 
         model.addAttribute("totalExames", exameService.contarExames());
-        model.addAttribute("totalPacientes", pacienteService.contarPacientes());
-        model.addAttribute("totalExamesAgendados", exameService.contarExamesStatus("AGENDADO"));
-        model.addAttribute("totalLaboratorios", labService.contarLaboratorios());
+        model.addAttribute("totalPacientes", pacienteService.contarPacientesUsuario());
+        model.addAttribute("totalExamesAgendados", exameService.contarExamesStatusUsuario("AGENDADO"));
+        model.addAttribute("totalLaboratorios", labService.contarLaboratoriosUsuario());
         model.addAttribute("usuario", usuario.get());
         return "main";
     }
