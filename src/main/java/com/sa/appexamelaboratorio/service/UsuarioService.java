@@ -40,7 +40,7 @@ public class UsuarioService implements UserDetailsService {
         return usuario.get();
     }
 
-    public Long contarPacientes() {
+    public Long contarUsuarios() {
         return usuarioRepository.count();
     }
 
@@ -50,6 +50,10 @@ public class UsuarioService implements UserDetailsService {
 
     public void deletarPorId(Long id) {
         usuarioRepository.deleteById(id);
+    }
+
+    public Long contarPorGenero(String genero) {
+        return usuarioRepository.countBySexo(genero);
     }
 
     @Override

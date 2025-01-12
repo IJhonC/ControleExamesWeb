@@ -3,7 +3,6 @@ package com.sa.appexamelaboratorio.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,6 @@ import com.sa.appexamelaboratorio.service.ExameService;
 import com.sa.appexamelaboratorio.service.LabService;
 import com.sa.appexamelaboratorio.service.PacienteService;
 import com.sa.appexamelaboratorio.service.UsuarioService;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/admin")
@@ -40,8 +38,16 @@ public class AdminController {
         Long[] valores = { labService.contarLaboratorios(), pacienteService.contarPacientes(),
                 exameService.contarExames() };
 
-        System.out.println("EXAMES: " + exameService.contarExames());
-        model.addAttribute("totalPacientes", usuarioService.contarPacientes());
+        Long totalUsuarios = usuarioService.contarUsuarios();
+        Long totalMulheres = usuarioService.contarPorGenero("Feminino");
+        Long totalHomens = usuarioService.contarPorGenero("Masculino");
+
+        int porcentagemHomens = totalUsuarios > 0 ? (int) ((totalHomens * 100) / totalUsuarios) : 0;
+        int porcentagemMulheres = totalUsuarios > 0 ? (int) ((totalMulheres * 100) / totalUsuarios) : 0;
+
+        model.addAttribute("totalUsuarios", usuarioService.contarUsuarios());
+        model.addAttribute("porcentagemHomens", porcentagemHomens);
+        model.addAttribute("porcentagemMulheres", porcentagemMulheres);
         model.addAttribute("valores", valores);
         if (busca == null) {
             model.addAttribute("usuarios", usuarioService.listarUsuaios());

@@ -147,10 +147,25 @@
         <div class="container d-flex">
             <div class="col-5 d-flex align-items-center">
                 <div class="progress-container">
-                    <h2>Total de Usuários Cadastrados: <span th:text="${totalPacientes}">34</span></h2>
-                    <div class="progress-wrapper">
-                        <div class="progress-bar" th:style="'width:' + (${totalPacientes} / 100 * 100) + '%'">
-                            <span th:text="${totalPacientes} + '%'"></span>
+                    <h2>Total de Usuários Cadastrados: <span th:text="${totalUsuarios}">34</span></h2>
+                    <!-- Barra de progresso para homens -->
+                    <div class="mt-3">
+                        <label for="progressHomens"><strong>Homens:</strong></label>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-primary" role="progressbar"
+                                th:style="'width: ' + ${porcentagemHomens} + '%'" th:text="${porcentagemHomens + '%'}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Barra de progresso para mulheres -->
+                    <div class="mt-3">
+                        <label for="progressMulheres"><strong>Mulheres:</strong></label>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-danger" role="progressbar"
+                                th:style="'width: ' + ${porcentagemMulheres} + '%'"
+                                th:text="${porcentagemMulheres + '%'}">
+                            </div>
                         </div>
                     </div>
                     <a href="/admin/cadastrarUsuario">
@@ -159,6 +174,11 @@
                     <div data-aos="zoom-in" th:if="${success}"
                         class="d-flex justify-content-center align-items-center mt-3" role="alert">
                         <h6 th:text="${success}" style="color: green;"></h6>
+                    </div>
+
+                    <div data-aos="zoom-in" th:if="${erro}"
+                        class="d-flex justify-content-center align-items-center mt-3" role="alert">
+                        <h6 th:text="${erro}" style="color: red;"></h6>
                     </div>
                 </div>
             </div>
