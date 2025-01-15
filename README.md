@@ -4,7 +4,16 @@ Sistema de Controle de Exames Web
 
 ## Sobre
 
-Aqui você coloca uma explicação mais detalhada sobre o seu projeto. O que ele faz? Como ele resolve um problema ou qual a sua principal funcionalidade?
+Esse projeto propoem um sistema de controle de exames completo. Nele você gerencia seus laboratórios, pacientes e os exames de forma organizada e segura.
+
+## Funcionalidades
+
+- **Sistema de Controle de acesso:** Suporta usuários Clientes e Adiminstradores. O clientes acessa apenas as funcionalidades de produção do sistema, já os adiministradores são permitidos a usar o painel de controle para gerenciar, editar e visualizar os clientes.
+- **Gerenciamento dos Componentes:** O sistema oferece listagem, exclusão, edição e cadastro dos laboratórios, exames e pacientes. Essa listagem de cada item suporta um filtro de pesquisa por nome.
+- **Criação de Relatórios:** Geração de relatórios de acordo com paciente, com laboratório ou com ambos.
+- **Exportação para pdf:** Exportação dos relatórios para um arquivo PDF.
+- **Kanban Iterativo:** Disponibilização de um Kanban interativo para visualização da situação dos exames cadastrados e seus respectivos status.
+- **Painel do Adiministrador:**
 
 ## Tecnologias Envolvidas
 
